@@ -4,6 +4,8 @@ This repository contains instances and the source code for OSP of the following 
 
 - F. Da Ros, L. Di Gaspero, M.-L. Lackner, N. Musliu, F. Winter, Local Search Algorithms for the Oven Scheduling Problem, in: Proceedings of the Companion Conference on Genetic and Evolutionary Computation, Association for Computing Machinery, Melbourne, Australia, 2024.
 
+- F. Da Ros, L. Di Gaspero, M.-L. Lackner, N. Musliu, F. Winter, Multi-neighborhood Simulated Annealing for the Oven Scheduling Problem, Under Review.
+
 ## Cite
 
 ```
