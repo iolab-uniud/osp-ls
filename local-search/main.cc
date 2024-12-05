@@ -145,7 +145,10 @@ int main(int argc, const char* argv[])
     }
 
     
-    if (method == std::string("SA_all") && 
+    if ((method == std::string("SA_all") ||
+        method == std::string("HC_all") || 
+        method == std::string("LAHC_all") ||) 
+        && 
         (!swap_rate.IsSet() || 
         !insert_rate.IsSet() || 
         !inverse_rate.IsSet() || 
@@ -396,6 +399,10 @@ int main(int argc, const char* argv[])
         {
             swap_rate, insert_rate, inverse_rate, single_job_to_new_batch_rate, more_jobs_to_new_batch_rate
         });
+
+        // create hill climbing
+        HillClimbing<OSP_Input, OSP_Output, decltype(multi_all)::MoveType, DefaultCostStructure<long>> HC_all(in, OSP_sm, multi_all, "HC_all");
+        LateAcceptanceHillClimbing<OSP_Input, OSP_Output, decltype(multi_all)::MoveType, DefaultCostStructure<long>> LAHC_all(in, OSP_sm, multi_all, "LAHC_all");
         
         // create the simulated annealing
         SimulatedAnnealing<OSP_Input, OSP_Output, decltype(multi_all)::MoveType, DefaultCostStructure<long>> SA_all(in, OSP_sm, multi_all, "SA_all");
@@ -424,6 +431,16 @@ int main(int argc, const char* argv[])
         {
             used_runner = &SA_all;
             OSP_solver.SetRunner(SA_all);
+        }
+        else if (method ==  std::string("HC_all"))
+        {
+            used_runner = &HC_all;
+            OSP_solver.SetRunner(HC_all);
+        }
+        else if (method ==  std::string("LAHC_all"))
+        {
+            used_runner = &LAHC_all;
+            OSP_solver.SetRunner(LAHC_all);
         }
         else if (method ==  std::string("SA_noSwap"))
         {
@@ -613,6 +630,9 @@ int main(int argc, const char* argv[])
         {
             swap_rate, insert_rate, inverse_rate, single_job_to_new_batch_rate, more_jobs_to_new_batch_rate
         });
+
+        HillClimbing<OSP_Input, OSP_Output, decltype(multi_all)::MoveType, DefaultCostStructure<long>> HC_all(in, OSP_sm, multi_all, "HC_all");
+        LateAcceptanceHillClimbing<OSP_Input, OSP_Output, decltype(multi_all)::MoveType, DefaultCostStructure<long>> LAHC_all(in, OSP_sm, multi_all, "LAHC_all");
         
         // create the simulated annealing
         SimulatedAnnealing<OSP_Input, OSP_Output, decltype(multi_all)::MoveType, DefaultCostStructure<long>> SA_all(in, OSP_sm, multi_all, "SA_all");
@@ -641,6 +661,16 @@ int main(int argc, const char* argv[])
         {
             used_runner = &SA_all;
             OSP_solver.SetRunner(SA_all);
+        }
+        else if (method ==  std::string("HC_all"))
+        {
+            used_runner = &HC_all;
+            OSP_solver.SetRunner(HC_all);
+        }
+        else if (method ==  std::string("LAHC_all"))
+        {
+            used_runner = &LAHC_all;
+            OSP_solver.SetRunner(LAHC_all);
         }
         else if (method ==  std::string("SA_noSwap"))
         {
